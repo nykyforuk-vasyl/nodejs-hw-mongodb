@@ -7,9 +7,10 @@ export const validateBody = (schema) => async (req, res, next) => {
     });
     next();
   } catch (err) {
-    const error = createHttpError(400, 'Invalid ID or data format', {
-      message:
-        'Please ensure all provided data, including IDs, are in the correct format.',
+    const errorDetails = err.details?.map((detail) => detail.message) || [];
+    const error = createHttpError(400, 'Validation Error', {
+      message: 'Please ensure all provided data is in the correct format.',
+      errors: errorDetails,
     });
     next(error);
   }
