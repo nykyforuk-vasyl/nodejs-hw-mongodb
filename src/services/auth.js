@@ -107,21 +107,21 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
 // -------------requestResetToken---------------
 
-// export const requestResetToken = async (email) => {
-//   const user = await UsersCollection.findOne({ email });
-//   if (!user) {
-//     throw createHttpError(404, 'User not found');
-//   }
-//   const resetToken = jwt.sign(
-//     {
-//       sub: user._id,
-//       email,
-//     },
-//     env('JWT_SECRET'),
-//     {
-//       expiresIn: '15m',
-//     },
-//   );
+export const requestResetToken = async (email) => {
+  const user = await UsersCollection.findOne({ email });
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+  const resetToken = jwt.sign(
+    {
+      sub: user._id,
+      email,
+    },
+    env('JWT_SECRET'),
+    {
+      expiresIn: '15m',
+    },
+  );
 
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
