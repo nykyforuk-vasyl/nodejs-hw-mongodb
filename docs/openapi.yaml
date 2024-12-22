@@ -13,8 +13,9 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  # - url: #посилання на задеплоєний сайт
+  - url: https://nodejs-hw-mongodb3-3ycc.onrender.com
 paths:
+  /contacts:
     get:
       $ref: ../swagger/paths/contacts/get.yaml
     post:
