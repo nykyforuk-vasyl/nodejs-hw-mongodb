@@ -3,8 +3,8 @@ required:
   - _id
   - name
   - phoneNumber
-  - isFavourite
   - contactType
+  - userId
 properties:
   _id:
     description: "Contact's id"
@@ -20,11 +20,11 @@ properties:
     example: +380680568589
   email:
     description: "Contact's email"
-    type: String
+    type: string
     example: contact.123@gmail.com
   isFavourite:
     description: "Contact's is favourite"
-    type: Boolean
+    type: boolean
     example: true
   contactType:
     description: "Contact's type"

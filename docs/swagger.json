@@ -62,10 +62,16 @@
             "in": "query",
             "name": "sortBy",
             "schema": {
-              "type": "string",
-              "example": "age"
-            },
-            "description": "All contact's fields can be mentioned. Default value - _id"
+              "enum": [
+                "_id",
+                "name",
+                "phoneNumber",
+                "email",
+                "isFavourite",
+                "contactType"
+              ],
+              "example": "name"
+            }
           },
           {
             "in": "query",
@@ -81,39 +87,15 @@
           },
           {
             "in": "query",
-            "name": "minAvgMark",
+            "name": "isFavourite",
             "schema": {
-              "type": "number",
-              "example": 4
+              "type": "boolean",
+              "example": true
             }
           },
           {
             "in": "query",
-            "name": "maxAvgMark",
-            "schema": {
-              "type": "number",
-              "example": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "minAge",
-            "schema": {
-              "type": "number",
-              "example": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "maxAge",
-            "schema": {
-              "type": "number",
-              "example": 16
-            }
-          },
-          {
-            "in": "query",
-            "name": "gender",
+            "name": "contactType",
             "schema": {
               "type": "string",
               "enum": [
@@ -220,7 +202,6 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "isFavourite",
                   "contactType"
                 ],
                 "properties": {
@@ -236,12 +217,12 @@
                   },
                   "email": {
                     "description": "Contact's email",
-                    "type": "String",
+                    "type": "string",
                     "example": "contact.123@gmail.com"
                   },
                   "isFavourite": {
                     "description": "Contact's is favourite",
-                    "type": "Boolean",
+                    "type": "boolean",
                     "example": true
                   },
                   "contactType": {
@@ -252,11 +233,6 @@
                       "home",
                       "personal"
                     ]
-                  },
-                  "userId": {
-                    "description": "Contact's parent id",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
                   },
                   "photo": {
                     "description": "Contact's photo",
@@ -358,6 +334,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -378,7 +357,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "contactId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -484,7 +463,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "contactId",
+            "name": "id",
             "required": true,
             "schema": {
               "type": "string",
@@ -522,6 +501,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -543,8 +525,8 @@
           "_id",
           "name",
           "phoneNumber",
-          "isFavourite",
-          "contactType"
+          "contactType",
+          "userId"
         ],
         "properties": {
           "_id": {
@@ -564,12 +546,12 @@
           },
           "email": {
             "description": "Contact's email",
-            "type": "String",
+            "type": "string",
             "example": "contact.123@gmail.com"
           },
           "isFavourite": {
             "description": "Contact's is favourite",
-            "type": "Boolean",
+            "type": "boolean",
             "example": true
           },
           "contactType": {
